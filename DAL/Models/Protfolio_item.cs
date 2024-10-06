@@ -7,10 +7,10 @@ namespace DAL.Models
 
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public string Bio { get; set; } = null!;
-        [ForeignKey("Provider")]
+        public string? Bio { get; set; } 
         public int ProviderId { get; set; }
         public Provider Provider { get; set; } = null!;
-        public ICollection<Protfolio_image> Protfolio_Image { get; set; } = new HashSet<Protfolio_image>();
+
+        public ICollection<Protfolio_image>? Protfolio_Image { get; set; } = new HashSet<Protfolio_image>();
     }
 }
