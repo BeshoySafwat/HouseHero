@@ -19,7 +19,7 @@ namespace DAL.Data.Configurations
 
             S.HasOne(s=>s.Category)
                 .WithMany(c=>c.Services)
-                .HasForeignKey(s => s.CategoryId);
+                .HasForeignKey(s => s.CategoryId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

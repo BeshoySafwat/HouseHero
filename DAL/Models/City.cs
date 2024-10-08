@@ -5,7 +5,8 @@
         public int Id { get; set; }
         public string Name { get; set; } = null!;
 
-        public Provider? provider { get; set; }
-        public Customer? Customer { get; set; }
+        public ICollection< Provider>? provider { get; set; }=new HashSet<Provider>();
+        public ICollection< Customer>? Customers { get; set; }=new HashSet<Customer>();
+
     }
 }

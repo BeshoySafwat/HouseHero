@@ -13,16 +13,23 @@ namespace DAL.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Customer> C)
         {
-            C.HasKey(c=>c.Id);
+            C.ToTable("Customers");
+            C.HasKey(x => x.Id);
+            C.Property(x => x.Name).HasColumnType("nvarchar").HasMaxLength(50);
+            C.Property(x => x.Email).HasColumnType("nvarchar").HasMaxLength(50);
+            C.Property(x => x.PasswordHashed).HasColumnType("nvarchar");
+            C.Property(x => x.Address).HasColumnType("nvarchar");
+            C.Property(x => x.PhoneNumber).HasColumnType("nvarchar").HasMaxLength(20);
 
-            C.HasOne(C=>C.City)
-                .WithOne(c=>c.Customer)
-                .HasForeignKey<Customer>(c=>c.Id);
             //Review
             C.HasMany(C => C.Reviews)
                 .WithOne(R => R.Customer)
                 .HasForeignKey(R => R.CustomerId);
 
+            //City
+            C.HasOne(p => p.City)
+            .WithMany(c => c.Customers)
+            .HasForeignKey(p => p.CityId);
         }
     }
 }

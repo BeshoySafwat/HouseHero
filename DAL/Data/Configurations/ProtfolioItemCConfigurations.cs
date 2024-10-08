@@ -19,7 +19,7 @@ namespace DAL.Data.Configurations
 
             P.HasMany(p=>p.Protfolio_Image)
                 .WithOne(p=>p.Protfolio_Item)
-                .HasForeignKey(p=>p.ProtfolioId);
+                .HasForeignKey(p=>p.ProtfolioId).OnDelete(DeleteBehavior.Cascade); 
         }
     }
 }

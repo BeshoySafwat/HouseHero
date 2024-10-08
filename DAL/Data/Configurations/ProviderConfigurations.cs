@@ -13,20 +13,19 @@ namespace DAL.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Provider> P)
         {
-            P.HasKey(x=>x.Id);
+            P.ToTable("Providers");
+            P.HasKey(x => x.Id);
             P.Property(x => x.Name).HasColumnType("nvarchar").HasMaxLength(50);
             P.Property(x => x.Email).HasColumnType("nvarchar").HasMaxLength(50);
-            P.Property(x => x.PasswordHash).HasColumnType("nvarchar");
+            P.Property(x => x.PasswordHashed).HasColumnType("nvarchar");
             P.Property(x => x.Address).HasColumnType("nvarchar");
+            P.Property(x => x.PhoneNumber).HasColumnType("nvarchar").HasMaxLength(20);
             P.Property(x => x.Bio).HasColumnType("text");
-            //City
-            P.HasOne(p => p.City)
-            .WithOne(c => c.provider)
-            .HasForeignKey<Provider>(p => p.CityId);
+            
             //Service
             P.HasOne(p => p.Service)
              .WithMany(s => s.Providers)
-             .HasForeignKey(p => p.ServiceId);
+             .HasForeignKey(p => p.ServiceId).OnDelete(DeleteBehavior.SetNull);
             //Protfolio_item
             P.HasMany(p => p.Protfolio_Item)
              .WithOne(P => P.Provider)
@@ -34,10 +33,13 @@ namespace DAL.Data.Configurations
             //Review
             P.HasMany(p => p.Reviews)
              .WithOne(R => R.Provider)
-             .HasForeignKey(R => R.ProviderId);
+             .HasForeignKey(R => R.ProviderId).OnDelete(DeleteBehavior.NoAction);
 
-            
-            
+            //City
+            P.HasOne(p => p.City)
+            .WithMany(c => c.provider)
+            .HasForeignKey(p => p.CityId);
+
         }
     }
 }

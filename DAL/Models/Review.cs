@@ -11,7 +11,7 @@ namespace DAL.Models
         public int Id { get; set; }
         public int ProviderId { get; set; }
         public int CustomerId { get; set; }
-        public string Comment { get; set; } = null!;
+        public string? Comment { get; set; } = null!;
         public int Rating { get; set; }
 
         public Provider? Provider { get; set; } 

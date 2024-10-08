@@ -20,13 +20,18 @@ namespace DAL.Data.Configurations
 
             R.HasOne(R=>R.Provider)
                 .WithMany(R => R.Requests)
-                .HasForeignKey(R=>R.ProviderId);
+                .HasForeignKey(R=>R.ProviderId).OnDelete(DeleteBehavior.NoAction);
             R.HasOne(R=>R.Service)
                 .WithMany(R => R.Requests)
-                .HasForeignKey(R=>R.ServiceId);
+                .HasForeignKey(R=>R.ServiceId).OnDelete(DeleteBehavior.NoAction);
             R.HasOne(R=>R.Customer)
                 .WithMany(R => R.Requests)
-                .HasForeignKey(R=>R.CustomerId);
+                .HasForeignKey(R=>R.CustomerId).OnDelete(DeleteBehavior.NoAction);
+            R.Property(x=> x.Comment).HasColumnType("text");
+            R.Property(r => r.Status)
+            .HasConversion<string>()
+            ;R.Property(r => r.Prefered)
+            .HasConversion<string>();
 
         }
     }

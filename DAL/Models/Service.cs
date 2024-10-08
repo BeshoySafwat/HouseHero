@@ -8,8 +8,8 @@ namespace DAL.Models
         public string Name { get; set; } = null!;
         public int CategoryId { get; set; }
         public Category Category { get; set; }=null!;
-        public ICollection<Provider> Providers { get; set; } = new HashSet<Provider>();
-        public ICollection<Requests> Requests { get; set; } = new HashSet<Requests>();
+        public ICollection<Provider>? Providers { get; set; } = new HashSet<Provider>();
+        public ICollection<Requests>? Requests { get; set; } = new HashSet<Requests>();
 
     }
 }

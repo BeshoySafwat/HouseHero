@@ -1,3 +1,7 @@
+using DAL.Data.Context;
+using Microsoft.EntityFrameworkCore;
+using System;
+
 namespace HouseHero
 {
     public class Program
@@ -9,6 +13,10 @@ namespace HouseHero
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddDbContext<AppalicationDBContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Sql"));
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -14,8 +14,12 @@ namespace DAL.Data.Configurations
         public void Configure(EntityTypeBuilder<SavedProvider> S)
         {
             S.HasKey(s=>new {s.ProviderId,s.CustomerId});
-            S.HasOne(s=>s.Customer).WithMany(c=>c.SavedProviders).HasForeignKey(s=>s.CustomerId);
-            S.HasOne(s=>s.Provider).WithMany(p=>p.Saved).HasForeignKey(s=>s.ProviderId);
+            S.HasOne(s=>s.Customer)
+                .WithMany(c=>c.SavedProviders)
+                .HasForeignKey(s=>s.CustomerId).OnDelete(DeleteBehavior.NoAction);
+            S.HasOne(s=>s.Provider)
+                .WithMany(p=>p.Saved)
+                .HasForeignKey(s=>s.ProviderId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

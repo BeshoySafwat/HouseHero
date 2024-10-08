@@ -13,11 +13,13 @@ namespace DAL.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Available_Day> A)
         {
-            A.HasKey(a=> a.Id);
+            A.HasKey(a=> new {a.Id,a.ProviderId});
 
             A.HasOne(a=>a.Provider)
                 .WithMany(p=>p.Available_Day)
-                .HasForeignKey(a=>a.ProviderId);
+                .HasForeignKey(a=>a.ProviderId).OnDelete(DeleteBehavior.Cascade);
+            A.Property(r => r.Day)
+            .HasConversion<string>();
         }
     }
 }

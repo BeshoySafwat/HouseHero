@@ -12,6 +12,11 @@ namespace DAL.Models
         rejected = 2,
         on_Review=3
     };
+    public enum Prefered_Communction
+    {
+        whatsapp,
+        call
+    }
     public class Requests
     {
         public int Id { get; set; }
@@ -19,8 +24,9 @@ namespace DAL.Models
         public int CustomerId { get; set; }
         public int ServiceId { get; set; }
         public DateTime RequestDate { get; set; }
-        public string Prefered_Communction { get; set; } = null!;
-        public Status status {  get; set; } 
+        public Prefered_Communction Prefered { get; set; }
+        public string? Comment { get; set; } = null!;
+        public Status Status {  get; set; } 
         public Customer Customer { get; set; } = null!;
         public Provider Provider { get; set; } = null!;
         public Service Service { get; set; } = null!;
